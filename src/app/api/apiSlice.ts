@@ -5,6 +5,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import { setCredentials } from "../../features/auth/hooks/authSlice";
+import { useAuthActions } from "../../features/auth/hooks/useAuthActions";
 
 import { RootState } from "../store";
 // Define an interface for the error data

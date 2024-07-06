@@ -1,13 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "../assets/FileList.module.css";
 
-import { useGetFilesQuery } from "../hooks/filesApiSlice";
-import {
-  useGetFolderFilesQuery,
-  useGetFileofFolderQuery,
-} from "../hooks/foldersApiSlice";
+import { useGetFolderFilesQuery } from "../hooks/foldersApiSlice";
 
 import File from "./File";
 import { FileType } from "../types/file";
@@ -22,7 +18,10 @@ export default function FileList({ folderId }: FileListProps) {
   const [currentFolderId, setCurrentFolderId] = useState(folderId);
   const { data, isLoading, isSuccess, isError, error } =
     useGetFolderFilesQuery(currentFolderId);
-  console.log("data", data);
+
+  useEffect(() => {
+    setCurrentFolderId(folderId);
+  }, [folderId]);
 
   const handleClick = (file: FileType) => {
     if (file.mimeType === "application/vnd.google-apps.folder") {

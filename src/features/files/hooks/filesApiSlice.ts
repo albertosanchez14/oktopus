@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 
-import { apiSlice } from "../../app/api/apiSlice";
-import { RootState } from "../../app/store";
+import { apiSlice } from "../../../app/api/apiSlice";
+import { RootState } from "../../../app/store";
 
 const filesAdapter = createEntityAdapter({});
 

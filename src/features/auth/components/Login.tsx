@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { setCredentials } from "../hooks/authSlice";
+import { useAuthActions } from "../hooks/useAuthActions";
 import { useLoginMutation } from "../hooks/authApiSlice";
 
 export default function Login() {
@@ -13,7 +12,7 @@ export default function Login() {
   const [errMsg, setErrMsg] = useState("");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { setCreds } = useAuthActions();
   const [login, { isLoading }] = useLoginMutation();
 
   useEffect(() => {
@@ -37,7 +36,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const { accessToken } = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ accessToken }));
+      setCreds(accessToken);
       setUsername("");
       setPassword("");
       navigate("/files");
