@@ -1,0 +1,11 @@
+#account_list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 2em;
+  gap: 0px;
+  border-radius: 21px;
+  background: #FFFDF6;
+}

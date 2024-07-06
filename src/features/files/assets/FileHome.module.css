@@ -1,0 +1,20 @@
+#file_home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #100071;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+#file_home > div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+  box-sizing: border-box;
+}

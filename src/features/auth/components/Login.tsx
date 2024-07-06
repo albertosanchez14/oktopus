@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { setCredentials } from "./authSlice";
-import { useLoginMutation } from "./authApiSlice";
+import { setCredentials } from "../hooks/authSlice";
+import { useLoginMutation } from "../hooks/authApiSlice";
 
 export default function Login() {
   const userRef = useRef<HTMLInputElement>(document.createElement("input"));
