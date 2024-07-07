@@ -45,7 +45,7 @@ export default function FileList({ folderId }: FileListProps) {
           <div
             className={file.mimeType}
             key={file.id}
-            onClick={() => handleClick(file)}
+            onDoubleClick={() => handleClick(file)}
           >
             <File file={file} />
           </div>
