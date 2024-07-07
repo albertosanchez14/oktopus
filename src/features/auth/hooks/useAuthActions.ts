@@ -10,4 +10,3 @@ export const useAuthActions = () => {
 
   return { setCreds };
 };
-

@@ -1,31 +1,33 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import styles from "../assets/styles/FileList.module.css";
 
 import { useGetFolderFilesQuery } from "../hooks/foldersApiSlice";
+import { useAppSelector } from "../../../app/store_dispatch";
+import { useFoldersActions } from "../hooks/useFoldersActions";
 
 import File from "./File";
 import { FileType } from "../types/file";
 
-type FileListProps = {
-  folderId: string;
-};
-
-export default function FileList({ folderId }: FileListProps) {
+export default function FileList() {
   const navigate = useNavigate();
+  const { folderIdParam } = useParams();
+  const folderId = folderIdParam || "root";
 
-  const [currentFolderId, setCurrentFolderId] = useState(folderId);
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetFolderFilesQuery(currentFolderId);
+  const currentFolder = useAppSelector((state) => state.folder);
+  const { setFolder } = useFoldersActions();
+  const { data, isLoading, isSuccess, isError, error } = useGetFolderFilesQuery(
+    currentFolder.folderId
+  );
 
   useEffect(() => {
-    setCurrentFolderId(folderId);
+    setFolder({ folderId, folderName: currentFolder.folderName });
   }, [folderId]);
 
   const handleClick = (file: FileType) => {
     if (file.mimeType === "application/vnd.google-apps.folder") {
-      setCurrentFolderId(file.id);
+      setFolder({ folderId: file.id, folderName: file.name });
     }
     console.log("Clicked on file", file.name);
     navigate(`/files/${file.id}`);
@@ -37,7 +39,6 @@ export default function FileList({ folderId }: FileListProps) {
   if (isError) {
     return <div>Error: {error.data.message}</div>;
   }
-
   if (isSuccess) {
     return (
       <div id={styles.file_list}>
