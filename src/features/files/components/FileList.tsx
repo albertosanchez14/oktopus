@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "../assets/styles/FileList.module.css";
 
@@ -10,26 +10,24 @@ import { useFoldersActions } from "../hooks/useFoldersActions";
 import File from "./File";
 import { FileType } from "../types/file";
 
-export default function FileList() {
-  const navigate = useNavigate();
-  const { folderIdParam } = useParams();
-  const folderId = folderIdParam || "root";
+type FileListProps = {
+  folderId: string;
+};
 
-  const currentFolder = useAppSelector((state) => state.folder);
-  const { setFolder } = useFoldersActions();
+export default function FileList({ folderId }: FileListProps) {
+  const navigate = useNavigate();
+
+  const folders = useAppSelector((state) => state.folder);
+  const currentFolder = folders[folders.length - 1];
+  const { addFolder } = useFoldersActions();
   const { data, isLoading, isSuccess, isError, error } = useGetFolderFilesQuery(
     currentFolder.folderId
   );
 
-  useEffect(() => {
-    setFolder({ folderId, folderName: currentFolder.folderName });
-  }, [folderId]);
-
   const handleClick = (file: FileType) => {
     if (file.mimeType === "application/vnd.google-apps.folder") {
-      setFolder({ folderId: file.id, folderName: file.name });
+      addFolder({ folderId: file.id, folderName: file.name });
     }
-    console.log("Clicked on file", file.name);
     navigate(`/files/${file.id}`);
   };
 

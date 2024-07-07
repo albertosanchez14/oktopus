@@ -2,15 +2,19 @@
   flex: 3;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
   gap: 0px;
   border-radius: 21px;
   background: #FFFDF6;
   box-sizing: border-box;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
 }
 
 #file_list > div {
   width: 100%;
-  height: 100%;
+  height: 58px;
 }

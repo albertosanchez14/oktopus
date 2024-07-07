@@ -1,7 +1,8 @@
+import { useEffect, useRef } from "react";
+
 import { FileType } from "../types/file";
 
 import styles from "../assets/styles/File.module.css";
-import { useEffect, useRef } from "react";
 
 type FileProp = { file: FileType };
 
@@ -16,8 +17,9 @@ export default function File({ file }: FileProp) {
       imgRef.current.src = file.mimeType === "application/vnd.google-apps.folder"
       ? folderIcon
       : fileIcon;
+      imgRef.current.alt = `${file.mimeType} icon`;
     }
-  }, [file.mimeType]);
+  }, [file]);
 
   return (
     <div id={styles.file}>

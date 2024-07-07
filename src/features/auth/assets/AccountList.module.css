@@ -8,6 +8,7 @@
   gap: 0px;
   border-radius: 21px;
   background: #FFFDF6;
+  box-sizing: border-box;
 }
 
 #add_account {
