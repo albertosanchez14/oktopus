@@ -1,6 +1,6 @@
 import { FileType } from "../types/file";
 
-import styles from "../assets/File.module.css";
+import styles from "../assets/styles/File.module.css";
 import { useEffect, useRef } from "react";
 
 type FileProp = { file: FileType };

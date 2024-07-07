@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import styles from "../assets/FileList.module.css";
+import styles from "../assets/styles/FileList.module.css";
 
 import { useGetFolderFilesQuery } from "../hooks/foldersApiSlice";
 
