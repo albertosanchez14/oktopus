@@ -1,4 +1,5 @@
 import { apiSlice } from "../../../app/api/apiSlice";
+import { FileType } from "../types/file";
 
 const foldersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,8 +19,17 @@ const foldersApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    downloadFile: builder.query({
+      query: (args: { folderId: string, file: FileType }) => ({
+        url: `/files/folders/${args.folderId}/${args.file.id}`,
+        body: args.file,        
+      }),
+    }),
   }),
 });
 
-export const { useGetFolderFilesQuery, useGetFileofFolderQuery } =
-  foldersApiSlice;
+export const {
+  useGetFolderFilesQuery,
+  useGetFileofFolderQuery,
+  useDownloadFileQuery,
+} = foldersApiSlice;

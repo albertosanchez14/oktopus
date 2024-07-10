@@ -54,7 +54,3 @@ export default function FileWh() {
     </div>
   );
 }
-function setFolder(arg0: { folderId: string; }) {
-  throw new Error("Function not implemented.");
-}
-
